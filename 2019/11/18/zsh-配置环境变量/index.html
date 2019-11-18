@@ -51,28 +51,31 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Mathripper">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+  <meta name="description" content="参考  http:&#x2F;&#x2F;postgresapp.com&#x2F; http:&#x2F;&#x2F;postgresapp.com&#x2F;documentation&#x2F;cli-tools.html http:&#x2F;&#x2F;www.yiibai.com&#x2F;postgresql&#x2F;2013080439.html 终极 Shell——ZSH： https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;19556676 Zsh安装配置指南 http:&#x2F;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zsh 配置环境变量">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;18&#x2F;zsh-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F&#x2F;index.html">
 <meta property="og:site_name" content="Mathripper">
+<meta property="og:description" content="参考  http:&#x2F;&#x2F;postgresapp.com&#x2F; http:&#x2F;&#x2F;postgresapp.com&#x2F;documentation&#x2F;cli-tools.html http:&#x2F;&#x2F;www.yiibai.com&#x2F;postgresql&#x2F;2013080439.html 终极 Shell——ZSH： https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;19556676 Zsh安装配置指南 http:&#x2F;&#x2F;">
 <meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-11-18T14:23:34.340Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2019/11/18/zsh-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>Mathripper</title>
+  <title>zsh 配置环境变量 | Mathripper</title>
   
 
 
@@ -178,82 +181,10 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/18/mac-pfctl-%E5%B1%8F%E8%94%BD-ip/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mathripper">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mathripper">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/18/mac-pfctl-%E5%B1%8F%E8%94%BD-ip/" class="post-title-link" itemprop="url">mac pfctl 屏蔽 ip</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-18 22:02:11 / Modified: 22:22:53" itemprop="dateCreated datePublished" datetime="2019-11-18T22:02:11+08:00">2019-11-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-          <blockquote>
-<p>阻止与目标 ip 建立连接</p>
-</blockquote>
-<h2 id="查看-ip-连接情况"><a href="#查看-ip-连接情况" class="headerlink" title="查看 ip 连接情况"></a>查看 ip 连接情况</h2><p>运行脚本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$1</span> =~ (tcp|udp) ]] || [ -z <span class="string">"<span class="variable">$1</span>"</span> ];<span class="keyword">then</span></span><br><span class="line">    :</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> Wrong option!</span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">trap</span> <span class="string">'tput clear;exit 0'</span> 2</span><br><span class="line">col=$(tput cols)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    tput clear</span><br><span class="line">    lsof -nPi4<span class="variable">$1</span> |awk <span class="string">'NR&gt;1&#123;split($9,ip,"-&gt;")</span></span><br><span class="line"><span class="string">split(ip[1],ip1,":")</span></span><br><span class="line"><span class="string">split(ip[2],ip2,":")</span></span><br><span class="line"><span class="string">printf("%-10s%5s %-15s%1s%5s %1s %-15s%1s%5s %s\n",$1,$2,ip1[1],(NR&gt;1?":":""),ip1[2],ip[2]!=""?"&gt;":"",ip2[1],length(ip2)&gt;1?":":"",ip2[2],$10)</span></span><br><span class="line"><span class="string">&#125;'</span></span><br><span class="line">    tput cup 0 <span class="variable">$col</span></span><br><span class="line">    sleep 2</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-
-<p>假设该脚本保存为 <code>./ports.sh</code>，则运行 <code>./ports.sh tcp</code></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/18/mac-pfctl-%E5%B1%8F%E8%94%BD-ip/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
   
   
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/18/zsh-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -267,8 +198,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/18/zsh-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" class="post-title-link" itemprop="url">zsh 配置环境变量</a>
+          zsh 配置环境变量
         </h1>
 
         <div class="post-meta">
@@ -304,7 +234,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
+        <blockquote>
 <p>参考</p>
 <ol>
 <li><a href="http://postgresapp.com/" target="_blank" rel="noopener">http://postgresapp.com/</a></li>
@@ -315,32 +245,78 @@
 </ol>
 </blockquote>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>mac 一般使用bash作为默认shell<br>在 Linux 里执行这个命令和 Mac 略有不同，你会发现 Mac 多了一个 zsh，也就是说 OS X 系统预装了个 zsh，这是个神马 Shell 呢？<br>目前常用的 Linux 系统和 OS X 系统的默认 Shell 都是 bash，但是真正强大的 Shell 是深藏不露的 zsh， 这货绝对是马车中的跑车，跑车中的飞行车，史称『终极 Shell』，但是由于配置过于复杂，所以初期无人问津，很多人跑过来看看 zsh 的配置指南，什么都不说转身就走了。直到有一天，国外有个穷极无聊的程序员开发出了一个能够让你快速上手的zsh项目，叫做「oh my zsh」，Github 网址是：<a href="https://github.com/robbyrussell/oh-my-zsh**" target="_blank" rel="noopener">https://github.com/robbyrussell/oh-my-zsh**</a>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/18/zsh-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+<a id="more"></a>
+
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="bash中设置环境变量path的几种方法"><a href="#bash中设置环境变量path的几种方法" class="headerlink" title="bash中设置环境变量path的几种方法"></a>bash中设置环境变量path的几种方法</h3><p>Mac系统的环境变量，加载顺序为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/etc/profile</span><br><span class="line">/etc/paths</span><br><span class="line">~/.bash_profile</span><br><span class="line">~/.bash_login</span><br><span class="line">~/.profile</span><br><span class="line">~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>当然<code>/etc/profile</code>和<code>/etc/paths</code>是系统级别的，系统启动就会加载，后面几个是当前用户级的环境变量。后面3个按照从前往后的顺序读取，如果<code>/.bash_profile</code>文件存在，则后面的几个文件就会被忽略不读了，如果<code>/.bash_profile</code>文件不存在，才会以此类推读取后面的文件。<code>~/.bashrc</code>没有上述规则，它是 bash shell 打开的时候载入的。</p>
+<p>如果没特殊说明,设置PATH的语法都为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#中间用冒号隔开</span></span><br><span class="line">     <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:&lt;PATH 1&gt;:&lt;PATH 2&gt;:&lt;PATH 3&gt;:------:&lt;PATH N&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="全局设置"><a href="#全局设置" class="headerlink" title="全局设置"></a>全局设置</h3><p>下面的几个文件设置是全局的，修改时需要root权限</p>
+<p>1）<code>/etc/paths</code> （全局建议修改这个文件)<br>编辑 <code>paths</code>，将环境变量添加到 paths 文件中 ，一行一个路径  </p>
+<blockquote>
+<p>Hint：输入环境变量时，不用一个一个地输入，只要拖动文件夹到 Terminal 里就可以了。</p>
+</blockquote>
+<p>2）<code>/etc/profile</code> （建议不修改这个文件 ）<br>全局（公有）配置，不管是哪个用户，登录时都会读取该文件。</p>
+<p>3）<code>/etc/bashrc</code> （一般在这个文件中添加系统级环境变量）<br>全局（公有）配置，bash shell 执行时，不管是何种方式，都会读取此文件。</p>
+<p>4）<br>1.创建一个文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo touch /etc/paths.d/mysql</span><br></pre></td></tr></table></figure>
+
+<p>2.用 vim 打开这个文件（如果是以 open -t 的方式打开，则不允许编辑）  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/paths.d/mysql</span><br></pre></td></tr></table></figure>
+
+<p>3.编辑该文件，键入路径并保存（关闭该 Terminal 窗口并重新打开一个，就能使用 mysql 命令了）  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/mysql/bin</span><br></pre></td></tr></table></figure>
+
+<p>据说，这样可以自己生成新的文件，不用把变量全都放到 paths 一个文件里，方便管理。</p>
+<h3 id="单个用户设置"><a href="#单个用户设置" class="headerlink" title="单个用户设置"></a>单个用户设置</h3><p>1）<code>~/.bash_profile</code> （任意一个文件中添加用户级环境变量）<br>（注：Linux 里面是 .bashrc 而 Mac 是 .bash_profile）<br>若 bash shell 是以 login 方式执行时，才会读取此文件。该文件仅仅执行一次!默认情况下，他设置一些环境变量<br>设置命令别名 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> ll=’ls -la’</span><br></pre></td></tr></table></figure>
+
+<p>设置环境变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/opt/<span class="built_in">local</span>/bin:/opt/<span class="built_in">local</span>/sbin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+
+<p>2）<code>~/.bashrc</code> 同上  </p>
+<p>如果想立刻生效，则可执行下面的语句：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> 相应的文件</span><br></pre></td></tr></table></figure>
+
+<p>一般环境变量更改后，重启后生效。</p>
+<h2 id="解决-Mac-下配置环境变量在-ZSH-中无效的问题"><a href="#解决-Mac-下配置环境变量在-ZSH-中无效的问题" class="headerlink" title="解决 Mac 下配置环境变量在 ZSH 中无效的问题"></a>解决 Mac 下配置环境变量在 ZSH 中无效的问题</h2><p>在配置 gradle 的时候, 发现在 <code>/etc/profiles</code> 中设置了环境变量后, 还是不能在 zsh 中使用. 但在 Terminal 中可以正常使用. 后来发现是因为没有在 <code>.zshrc</code> 中配置.</p>
+<p>在终端中输入: <code>cat ~/.zshrc</code> 以此来查看 <code>.zshrc</code> 文件, 找到里面的 “ # User configuration “ 部分. 可以看到当前 zsh 支持的所有本地已配置环境变量.</p>
+<p>在 <code>export PATH=”XXXX”</code> 里面追加一条想要配置的环境变量路径.</p>
+<p>重启 item2 即可</p>
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/18/mac-pfctl-%E5%B1%8F%E8%94%BD-ip/" rel="prev" title="mac pfctl 屏蔽 ip">
+                  mac pfctl 屏蔽 ip <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
       </footer>
+    
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -369,6 +345,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bash中设置环境变量path的几种方法"><span class="nav-number">2.1.</span> <span class="nav-text">bash中设置环境变量path的几种方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局设置"><span class="nav-number">2.2.</span> <span class="nav-text">全局设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单个用户设置"><span class="nav-number">2.3.</span> <span class="nav-text">单个用户设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决-Mac-下配置环境变量在-ZSH-中无效的问题"><span class="nav-number">3.</span> <span class="nav-text">解决 Mac 下配置环境变量在 ZSH 中无效的问题</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

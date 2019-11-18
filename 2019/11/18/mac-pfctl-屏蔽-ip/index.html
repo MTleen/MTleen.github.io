@@ -51,28 +51,31 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Mathripper">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+  <meta name="description" content="阻止与目标 ip 建立连接  查看 ip 连接情况运行脚本 12345678910111213141516171819#!&#x2F;bin&#x2F;bashif [[ $1 =~ (tcp|udp) ]] || [ -z &quot;$1&quot; ];then    :else    echo Wrong option!    exit 1fitrap &amp;apos;tput clear;exit 0&amp;apos; 2col=$(tput cols)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mac pfctl 屏蔽 ip">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;18&#x2F;mac-pfctl-%E5%B1%8F%E8%94%BD-ip&#x2F;index.html">
 <meta property="og:site_name" content="Mathripper">
+<meta property="og:description" content="阻止与目标 ip 建立连接  查看 ip 连接情况运行脚本 12345678910111213141516171819#!&#x2F;bin&#x2F;bashif [[ $1 =~ (tcp|udp) ]] || [ -z &quot;$1&quot; ];then    :else    echo Wrong option!    exit 1fitrap &amp;apos;tput clear;exit 0&amp;apos; 2col=$(tput cols)">
 <meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-11-18T14:22:53.694Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2019/11/18/mac-pfctl-%E5%B1%8F%E8%94%BD-ip/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>Mathripper</title>
+  <title>mac pfctl 屏蔽 ip | Mathripper</title>
   
 
 
@@ -178,10 +181,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/18/mac-pfctl-%E5%B1%8F%E8%94%BD-ip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -195,8 +198,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/18/mac-pfctl-%E5%B1%8F%E8%94%BD-ip/" class="post-title-link" itemprop="url">mac pfctl 屏蔽 ip</a>
+          mac pfctl 屏蔽 ip
         </h1>
 
         <div class="post-meta">
@@ -221,126 +223,65 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
+        <blockquote>
 <p>阻止与目标 ip 建立连接</p>
 </blockquote>
 <h2 id="查看-ip-连接情况"><a href="#查看-ip-连接情况" class="headerlink" title="查看 ip 连接情况"></a>查看 ip 连接情况</h2><p>运行脚本</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$1</span> =~ (tcp|udp) ]] || [ -z <span class="string">"<span class="variable">$1</span>"</span> ];<span class="keyword">then</span></span><br><span class="line">    :</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> Wrong option!</span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">trap</span> <span class="string">'tput clear;exit 0'</span> 2</span><br><span class="line">col=$(tput cols)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    tput clear</span><br><span class="line">    lsof -nPi4<span class="variable">$1</span> |awk <span class="string">'NR&gt;1&#123;split($9,ip,"-&gt;")</span></span><br><span class="line"><span class="string">split(ip[1],ip1,":")</span></span><br><span class="line"><span class="string">split(ip[2],ip2,":")</span></span><br><span class="line"><span class="string">printf("%-10s%5s %-15s%1s%5s %1s %-15s%1s%5s %s\n",$1,$2,ip1[1],(NR&gt;1?":":""),ip1[2],ip[2]!=""?"&gt;":"",ip2[1],length(ip2)&gt;1?":":"",ip2[2],$10)</span></span><br><span class="line"><span class="string">&#125;'</span></span><br><span class="line">    tput cup 0 <span class="variable">$col</span></span><br><span class="line">    sleep 2</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
 <p>假设该脚本保存为 <code>./ports.sh</code>，则运行 <code>./ports.sh tcp</code></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/18/mac-pfctl-%E5%B1%8F%E8%94%BD-ip/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/18/zsh-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Mathripper">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mathripper">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/18/zsh-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" class="post-title-link" itemprop="url">zsh 配置环境变量</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-11-18 21:06:53 / Modified: 22:23:34" itemprop="dateCreated datePublished" datetime="2019-11-18T21:06:53+08:00">2019-11-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index">
-                    <span itemprop="name">环境配置</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>参考</p>
+<a id="more"></a>
+<h2 id="屏蔽相应-ip"><a href="#屏蔽相应-ip" class="headerlink" title="屏蔽相应 ip"></a>屏蔽相应 ip</h2><p>从上述运行结果中找到想要屏蔽的 ip，分别执行：</p>
 <ol>
-<li><a href="http://postgresapp.com/" target="_blank" rel="noopener">http://postgresapp.com/</a></li>
-<li><a href="http://postgresapp.com/documentation/cli-tools.html" target="_blank" rel="noopener">http://postgresapp.com/documentation/cli-tools.html</a></li>
-<li><a href="http://www.yiibai.com/postgresql/2013080439.html" target="_blank" rel="noopener">http://www.yiibai.com/postgresql/2013080439.html</a></li>
-<li>终极 Shell——ZSH： <a href="https://zhuanlan.zhihu.com/p/19556676" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/19556676</a></li>
-<li>Zsh安装配置指南 <a href="http://www.linuxidc.com/Linux/2013-09/90377.htm" target="_blank" rel="noopener">http://www.linuxidc.com/Linux/2013-09/90377.htm</a></li>
+<li><p>修改 <code>/etc/pf.conf</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pf.conf</span><br></pre></td></tr></table></figure>
+
+<p>增加如下内容：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定义要阻止的IP地址表，用表的好处是如果有多个IP，你都可以添加到这里，逗号隔开即可</span></span><br><span class="line">table &lt;badguys&gt; &#123; 172.16.1.100,172.16.1.101 &#125;</span><br><span class="line"><span class="comment">#下面语句代表阻止从MacOS访问badguys里面定义的IP</span></span><br><span class="line">block out quick from any to &lt;badguys&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启用 pf<br>终端敲命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pfctl -evf /etc/pf.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果不想阻止这些 IP 了，可以使用以下命令关闭 pf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pfctl -dv</span><br></pre></td></tr></table></figure>
+
+</li>
 </ol>
+<p>很多破解软件拥有不止一个验证服务器，则服务重复以上过程，直至屏蔽所有验证服务器的 ip。</p>
+<blockquote>
+<p>注：该方法重启后无效</p>
 </blockquote>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>mac 一般使用bash作为默认shell<br>在 Linux 里执行这个命令和 Mac 略有不同，你会发现 Mac 多了一个 zsh，也就是说 OS X 系统预装了个 zsh，这是个神马 Shell 呢？<br>目前常用的 Linux 系统和 OS X 系统的默认 Shell 都是 bash，但是真正强大的 Shell 是深藏不露的 zsh， 这货绝对是马车中的跑车，跑车中的飞行车，史称『终极 Shell』，但是由于配置过于复杂，所以初期无人问津，很多人跑过来看看 zsh 的配置指南，什么都不说转身就走了。直到有一天，国外有个穷极无聊的程序员开发出了一个能够让你快速上手的zsh项目，叫做「oh my zsh」，Github 网址是：<a href="https://github.com/robbyrussell/oh-my-zsh**" target="_blank" rel="noopener">https://github.com/robbyrussell/oh-my-zsh**</a>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/18/zsh-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/11/18/zsh-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" rel="next" title="zsh 配置环境变量">
+                  <i class="fa fa-chevron-left"></i> zsh 配置环境变量
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
       </footer>
+    
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -369,6 +310,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看-ip-连接情况"><span class="nav-number">1.</span> <span class="nav-text">查看 ip 连接情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#屏蔽相应-ip"><span class="nav-number">2.</span> <span class="nav-text">屏蔽相应 ip</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
